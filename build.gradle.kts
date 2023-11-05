@@ -43,6 +43,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.2.2")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8")
 
     /* Springboot */
     implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
