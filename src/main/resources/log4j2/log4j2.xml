@@ -35,7 +35,7 @@
                      filePattern="logs/${appName}/error.%d{yyyy-MM-dd}.log">
             <PatternLayout pattern="${fileLayout}"/>
             <!--LevelRangeFilter필터를 사용할때에 단일 level의 필터만 허용한다. -->
-            <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
@@ -59,21 +59,24 @@
         </logger>
 
         <!-- rolling file에는 debug, console에는 info 분리하여 처리 가능하다. -->
-        <logger name="kr.pe.study.logforjava2" level="warn" additivity="true">
+        <logger name="org.springframework" level="error" additivity="false">
             <AppenderRef ref="errorFile"/>
         </logger>
 
-        <logger name="me.exam.ktwebfx.filter.LoggingFilter" level="info" additivity="true">
+        <logger name="me.exam.ktwebfx.filter.LoggingFilter" level="info" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="file"/>
         </logger>
 
-        <logger name="me.exam.ktwebfx.api" level="info" additivity="true">
+        <logger name="me.exam.ktwebfx.api" level="info" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="file"/>
         </logger>
 
         <!-- ROOT logger-->
-        <Root level="info"></Root>
+        <Root level="info">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file" />
+        </Root>
     </Loggers>
 </Configuration>
