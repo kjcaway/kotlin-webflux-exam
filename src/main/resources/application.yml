@@ -7,3 +7,6 @@ spring:
       host: 127.0.0.1
       port: 6379
       connect-timeout: 30s
+
+logging:
+  config: classpath:log4j2/log4j2.xml
