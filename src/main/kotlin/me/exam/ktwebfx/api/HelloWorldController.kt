@@ -25,7 +25,6 @@ class HelloWorldController(
 
     @GetMapping("/json-env")
     fun getJsonEnv(): Mono<ApiResult<*>> {
-
         return Mono.just(ApiResult.ok(jsonPropertyConfig.secretKey))
     }
 

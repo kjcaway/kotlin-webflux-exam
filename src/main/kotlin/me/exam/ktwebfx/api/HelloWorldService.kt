@@ -33,6 +33,7 @@ class HelloWorldService(
 
     fun setHash(key: String, field: String, value: String): Mono<Boolean> {
         val hashKey = "${REDIS_PREFIX}::${TYPE_HASH}::${key}"
+
         return redisTemplate.opsForHash<String, String>().put(hashKey, field, value)
                 .doOnSuccess { logger.info("set hash $key $field $value") }
                 .doOnError { logger.error("failed to set hash $key $field $value", it) }
