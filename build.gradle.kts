@@ -54,6 +54,7 @@ dependencies {
     /* Test */
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("io.mockk:mockk:1.10.4")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
 
 tasks.withType<KotlinCompile> {
