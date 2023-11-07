@@ -85,10 +85,10 @@ class SoapComponent {
             if (nodeList.length == 1) {
                 nodeList.item(0) as Element
             } else {
-                throw CustomException(CustomErrorCode.INTERNAL_SERVER_Custom_ERROR, "failed to soap call")
+                throw CustomException(CustomErrorCode.INTERNAL_SERVER_ERROR, "failed to soap call")
             }
         } catch (e: Exception) {
-            throw CustomException(CustomErrorCode.INTERNAL_SERVER_Custom_ERROR, "failed to soap call", e)
+            throw CustomException(CustomErrorCode.INTERNAL_SERVER_ERROR, "failed to soap call", e)
         }
     }
 }

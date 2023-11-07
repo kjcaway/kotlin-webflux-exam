@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class UrlUtilTest {
     @Test
-    fun test() {
+    fun `TEST getRegex and match`() {
         val urls = listOf("/api/a/b", "/api/a/c", "/api/a/123")
         val pattern = "/api/a/:id"
 

@@ -22,5 +22,5 @@ enum class CustomErrorCode(
     CONFLICT(HttpStatus.CONFLICT, "conflict"),
 
     // 500
-    INTERNAL_SERVER_Custom_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error");
 }
