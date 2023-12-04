@@ -1,7 +1,9 @@
 package me.exam.ktwebfx.api
 
+import me.exam.ktwebfx.api.dto.HelloDto
 import me.exam.ktwebfx.error.CustomErrorCode
 import me.exam.ktwebfx.error.CustomException
+import me.exam.ktwebfx.util.JsonUtil
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.redis.core.ReactiveRedisOperations
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.switchIfEmpty
+import java.util.UUID
 
 @Service
 class HelloWorldService(
@@ -21,6 +24,7 @@ class HelloWorldService(
 
     private final val REDIS_PREFIX = "ktwebfx"
     private final val TYPE_HASH = "hash"
+    private final val TYPE_JSONSTR = "jsonstr"
 
     fun getKeys(type: String, size: Long): Flux<String> {
         val options = ScanOptions.scanOptions()
@@ -68,5 +72,27 @@ class HelloWorldService(
                             .doOnError { logger.error("failed to delete $key") }
                 }
                 .then()
+    }
+
+    fun setJson(value: HelloDto): Mono<String> {
+        val key = UUID.randomUUID().toString()
+        val keyPrefixed = "${REDIS_PREFIX}::${TYPE_JSONSTR}::${key}"
+
+        return redisTemplate.opsForValue().set(keyPrefixed, JsonUtil.convertToJsonStr(value))
+                .doOnSuccess { logger.info("set $keyPrefixed $value") }
+                .doOnError { logger.error("failed to set $keyPrefixed $value", it) }
+                .thenReturn(key)
+    }
+
+    fun getJson(key: String): Mono<HelloDto> {
+        val keyPrefixed = "${REDIS_PREFIX}::${TYPE_JSONSTR}::${key}"
+
+        return redisTemplate.opsForValue().get(keyPrefixed)
+                .switchIfEmpty {
+                    Mono.error(CustomException(CustomErrorCode.NOT_FOUND))
+                }
+                .map { value ->
+                    JsonUtil.convertToObject(value as String, HelloDto::class.java)
+                }
     }
 }

@@ -1,5 +1,6 @@
 package me.exam.ktwebfx.api
 
+import me.exam.ktwebfx.api.dto.HelloDto
 import me.exam.ktwebfx.base.ApiResult
 import me.exam.ktwebfx.config.JsonPropertyConfig
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -57,5 +58,21 @@ class HelloWorldController(
     fun deleteRedisAll(): Mono<ApiResult<*>> {
         return helloWorldService.removeAll()
                 .then(Mono.fromCallable { ApiResult.ok() })
+    }
+
+    @GetMapping("/redis/hellodto/{id}")
+    fun getHelloDto(@PathVariable id: String): Mono<ApiResult<*>> {
+        return helloWorldService.getJson(id)
+                .map {
+                    ApiResult.ok(it)
+                }
+    }
+
+    @PostMapping("/redis/hellodto")
+    fun setHelloDto(@RequestBody helloDto: HelloDto): Mono<ApiResult<*>> {
+        return helloWorldService.setJson(helloDto)
+                .map {
+                    ApiResult.ok(it)
+                }
     }
 }
