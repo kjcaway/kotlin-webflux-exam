@@ -18,6 +18,8 @@ This is example code with kotlin and springboot reactive stack(webflux).
 * BaseResponse
 * GlobalErrorAttributes
 * NoSQL(Redis)
+* Junit
+* Testcontainers
 
 ### References
 
