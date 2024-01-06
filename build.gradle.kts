@@ -55,6 +55,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("io.mockk:mockk:1.10.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.testcontainers:testcontainers:1.17.6")
+    testImplementation("org.testcontainers:junit-jupiter:1.17.6")
 }
 
 tasks.withType<KotlinCompile> {
@@ -65,5 +67,11 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    enabled = true
+    useJUnitPlatform {
+        includeTags("api")
+    }
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }

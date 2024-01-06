@@ -1,0 +1,12 @@
+spring:
+  data:
+    redis:
+#      use dynamic properties, so it is not necessary to set
+#      host: 127.0.0.1
+#      port: 6379
+      connect-timeout: 30s
+
+external:
+  services:
+    test:
+      url: "http://localhost:8080"
