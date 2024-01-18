@@ -7,8 +7,16 @@ spring:
       host: 127.0.0.1
       port: 6379
       connect-timeout: 30s
+  cloud:
+    aws:
+      credentials:
+        access-key: access_key
+        secret-key: secret_key
+      region:
+        static: us-east-1
 
-logging:
-  config: classpath:log4j2/log4j2.xml
+
+#logging:
+#  config: classpath:log4j2/log4j2.xml
 
 json-env-file-path: /env.json

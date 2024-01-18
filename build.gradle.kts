@@ -37,6 +37,7 @@ configurations {
 dependencies {
     val kotlinVersion: String by project
     val springBootVersion: String by project
+    val springCloudAwsVersion: String by project
 
     /* Kotlin */
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
@@ -50,6 +51,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-log4j2:$springBootVersion")
+
+    /* AWS */
+    implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:$springCloudAwsVersion"))
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs")
 
     /* Test */
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
