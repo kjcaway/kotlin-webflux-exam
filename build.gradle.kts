@@ -62,6 +62,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.testcontainers:testcontainers:1.17.6")
     testImplementation("org.testcontainers:junit-jupiter:1.17.6")
+
+    /* Test ArchUnit */
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
 }
 
 tasks.withType<KotlinCompile> {
@@ -74,7 +77,7 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     enabled = true
     useJUnitPlatform {
-        includeTags("api")
+        includeTags("api", "util", "arch")
     }
     testLogging {
         events("passed", "skipped", "failed")

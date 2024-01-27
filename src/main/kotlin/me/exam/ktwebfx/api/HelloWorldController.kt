@@ -1,6 +1,7 @@
 package me.exam.ktwebfx.api
 
 import me.exam.ktwebfx.api.dto.HelloDto
+import me.exam.ktwebfx.api.service.HelloWorldService
 import me.exam.ktwebfx.base.ApiResult
 import me.exam.ktwebfx.config.JsonPropertyConfig
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -17,17 +18,17 @@ import reactor.core.publisher.Mono
 @RestController
 class HelloWorldController(
         val helloWorldService: HelloWorldService,
-        val jsonPropertyConfig: JsonPropertyConfig
+        //val jsonPropertyConfig: JsonPropertyConfig
 ) {
     @GetMapping()
     fun get(): Mono<ApiResult<*>> {
         return Mono.just(ApiResult.ok())
     }
 
-    @GetMapping("/json-env")
-    fun getJsonEnv(): Mono<ApiResult<*>> {
-        return Mono.just(ApiResult.ok(jsonPropertyConfig.secretKey))
-    }
+//    @GetMapping("/json-env")
+//    fun getJsonEnv(): Mono<ApiResult<*>> {
+//        return Mono.just(ApiResult.ok(jsonPropertyConfig.secretKey))
+//    }
 
     @GetMapping("/redis")
     fun getRedis(@RequestParam key: String, @RequestParam field: String): Mono<ApiResult<*>> {

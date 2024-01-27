@@ -1,4 +1,4 @@
-package me.exam.ktwebfx.api
+package me.exam.ktwebfx.api.service
 
 import me.exam.ktwebfx.api.dto.HelloDto
 import me.exam.ktwebfx.error.CustomErrorCode
@@ -19,6 +19,7 @@ import java.util.UUID
 class HelloWorldService(
         val redisTemplate: ReactiveRedisTemplate<String, Any>,
         val redisOperations: ReactiveRedisOperations<String, Any>
+
 ) {
     private val logger: Logger = LoggerFactory.getLogger(HelloWorldService::class.java)
 
