@@ -56,6 +56,9 @@ dependencies {
     implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:$springCloudAwsVersion"))
     implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs")
 
+    /* Blockhound */
+    implementation("io.projectreactor.tools:blockhound:1.0.8.RELEASE")
+
     /* Test */
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("io.mockk:mockk:1.10.4")
