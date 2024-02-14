@@ -8,6 +8,6 @@ import reactor.blockhound.BlockHound
 class KtwebfxApplication
 
 fun main(args: Array<String>) {
-    BlockHound.install()
+//    BlockHound.install()
     runApplication<KtwebfxApplication>(*args)
 }

@@ -16,7 +16,7 @@ spring:
         static: us-east-1
 
 
-#logging:
-#  config: classpath:log4j2/log4j2.xml
+logging:
+  config: classpath:log4j2/log4j2.xml
 
 json-env-file-path: /env.json

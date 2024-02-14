@@ -59,6 +59,8 @@ dependencies {
     /* Blockhound */
     implementation("io.projectreactor.tools:blockhound:1.0.8.RELEASE")
 
+    implementation("com.lmax:disruptor:3.3.6")
+
     /* Test */
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("io.mockk:mockk:1.10.4")

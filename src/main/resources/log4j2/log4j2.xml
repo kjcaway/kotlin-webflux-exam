@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="debug" monitorInterval="5">
-    <!--Common -->
-    <Properties>
-        <Property name="appName">ktwebfx</Property>
-        <Property name="consoleLayout">[%d{yyyy-MM-dd HH:mm:ss}] [%-5p] [%c{1}:%L] - %m%n</Property>
-        <Property name="fileLayout">%d [%t] %-5level %c(%M:%L) - %m%n</Property>
-    </Properties>
+  <!--Common -->
+  <Properties>
+    <Property name="appName">ktwebfx</Property>
+    <Property name="consoleLayout">[%d{yyyy-MM-dd HH:mm:ss}] [%-5p] [%c{1}:%L] - %m%n</Property>
+    <Property name="fileLayout">%d [%t] %-5level %c(%M:%L) - %m%n</Property>
+  </Properties>
 
-    <!-- Appender -->
-    <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${consoleLayout}"/>
-        </Console>
-        <!--ConsoleAppender, RollingFileAppneder -->
-        <RollingFile name="file"
-                     fileName="logs/${appName}/app.log"
-                     filePattern="logs/${appName}/app.%d{yyyy-MM-dd-hh}.log">
-            <PatternLayout pattern="${fileLayout}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy
-                        modulate="true"
-                        interval="1"/><!-- create log file for an hour-->
-            </Policies>
-            <DefaultRolloverStrategy max="5" fileIndex="min"> <!-- create files until 5 -->
-                <Delete basePath="/logs" maxDepth="3">
-                    <IfLastModified age="10d"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-
-
-        <RollingFile name="errorFile"
-                     fileName="logs/${appName}/error.log"
-                     filePattern="logs/${appName}/error.%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="${fileLayout}"/>
-            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="100 MB"/>
-            </Policies>
-            <DefaultRolloverstrategy>
-                <Delete basePath="/logs" maxDepth="3">
-                    <IfLastModified age="10d"/>
-                </Delete>
-            </DefaultRolloverstrategy>
-        </RollingFile>
+  <!-- Appender -->
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${consoleLayout}"/>
+    </Console>
+    <!--ConsoleAppender, RollingFileAppneder -->
+    <RandomAccessFile name="file"
+      fileName="/logs/${appName}/app.log"
+      filePattern="/logs/${appName}/app.%d{yyyy-MM-dd-hh}.log"
+      immediateFlush="false" append="false">
+      <PatternLayout pattern="${fileLayout}"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="100 KB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="5" fileIndex="min"> <!-- create files until 5 -->
+        <Delete basePath="/logs" maxDepth="3">
+          <IfLastModified age="10d"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RandomAccessFile>
 
 
-    </Appenders>
+<!--    <RandomAccessFile name="errorFile"-->
+<!--      fileName="/logs/${appName}/error.log"-->
+<!--      filePattern="/logs/${appName}/error.%d{yyyy-MM-dd}.log"-->
+<!--      immediateFlush="false">-->
+<!--      <PatternLayout pattern="${fileLayout}"/>-->
+<!--      <Policies>-->
+<!--        <SizeBasedTriggeringPolicy size="100 MB"/>-->
+<!--      </Policies>-->
+<!--      <DefaultRolloverstrategy>-->
+<!--        <Delete basePath="/logs" maxDepth="3">-->
+<!--          <IfLastModified age="10d"/>-->
+<!--        </Delete>-->
+<!--      </DefaultRolloverstrategy>-->
+<!--    </RandomAccessFile>-->
 
-    <!--TRACE > DEBUG > INFO > WARN > ERROR > FATAL -->
-    <Loggers>
-        <!-- springframework logging -->
-        <logger name="org.springframework" level="info" additivity="false">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="file"/>
-        </logger>
 
-        <!-- springframework error logging -->
-        <logger name="org.springframework" level="error" additivity="false">
-            <AppenderRef ref="errorFile"/>
-        </logger>
+  </Appenders>
 
-        <logger name="me.exam.ktwebfx.filter.LoggingFilter" level="info" additivity="false">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="file"/>
-        </logger>
+  <!--TRACE > DEBUG > INFO > WARN > ERROR > FATAL -->
+  <Loggers>
+    <!-- root logger-->
+    <Root level="info">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="file"/>
+    </Root>
 
-        <logger name="me.exam.ktwebfx.api" level="info" additivity="false">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="file"/>
-        </logger>
+    <!-- springframework logging -->
+    <AsyncLogger name="org.springframework" level="info" additivity="false">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="file"/>
+    </AsyncLogger>
 
-        <!-- root logger-->
-        <Root level="info">
-            <AppenderRef ref="console" />
-            <AppenderRef ref="file" />
-        </Root>
-    </Loggers>
+    <!-- springframework error logging -->
+<!--    <AsyncLogger name="org.springframework" level="error" additivity="false">-->
+<!--      <AppenderRef ref="errorFile"/>-->
+<!--    </AsyncLogger>-->
+
+    <AsyncLogger name="me.exam.ktwebfx.filter.LoggingFilter" level="info" additivity="false">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="file"/>
+    </AsyncLogger>
+
+    <AsyncLogger name="me.exam.ktwebfx.api" level="info" additivity="false">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="file"/>
+    </AsyncLogger>
+
+  </Loggers>
 </Configuration>
