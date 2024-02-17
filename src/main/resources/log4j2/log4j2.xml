@@ -29,20 +29,20 @@
     </RandomAccessFile>
 
 
-<!--    <RandomAccessFile name="errorFile"-->
-<!--      fileName="/logs/${appName}/error.log"-->
-<!--      filePattern="/logs/${appName}/error.%d{yyyy-MM-dd}.log"-->
-<!--      immediateFlush="false">-->
-<!--      <PatternLayout pattern="${fileLayout}"/>-->
-<!--      <Policies>-->
-<!--        <SizeBasedTriggeringPolicy size="100 MB"/>-->
-<!--      </Policies>-->
-<!--      <DefaultRolloverstrategy>-->
-<!--        <Delete basePath="/logs" maxDepth="3">-->
-<!--          <IfLastModified age="10d"/>-->
-<!--        </Delete>-->
-<!--      </DefaultRolloverstrategy>-->
-<!--    </RandomAccessFile>-->
+    <RandomAccessFile name="errorFile"
+      fileName="/logs/${appName}/error.log"
+      filePattern="/logs/${appName}/error.%d{yyyy-MM-dd}.log"
+      immediateFlush="false">
+      <PatternLayout pattern="${fileLayout}"/>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="100 MB"/>
+      </Policies>
+      <DefaultRolloverstrategy>
+        <Delete basePath="/logs" maxDepth="3">
+          <IfLastModified age="10d"/>
+        </Delete>
+      </DefaultRolloverstrategy>
+    </RandomAccessFile>
 
 
   </Appenders>
@@ -56,25 +56,25 @@
     </Root>
 
     <!-- springframework logging -->
-    <AsyncLogger name="org.springframework" level="info" additivity="false">
+    <Logger name="org.springframework" level="info" additivity="false">
       <AppenderRef ref="console"/>
       <AppenderRef ref="file"/>
-    </AsyncLogger>
+    </Logger>
 
     <!-- springframework error logging -->
-<!--    <AsyncLogger name="org.springframework" level="error" additivity="false">-->
-<!--      <AppenderRef ref="errorFile"/>-->
-<!--    </AsyncLogger>-->
+    <Logger name="org.springframework" level="error" additivity="false">
+      <AppenderRef ref="errorFile"/>
+    </Logger>
 
-    <AsyncLogger name="me.exam.ktwebfx.filter.LoggingFilter" level="info" additivity="false">
+    <Logger name="me.exam.ktwebfx.filter.LoggingFilter" level="info" additivity="false">
       <AppenderRef ref="console"/>
       <AppenderRef ref="file"/>
-    </AsyncLogger>
+    </Logger>
 
-    <AsyncLogger name="me.exam.ktwebfx.api" level="info" additivity="false">
+    <Logger name="me.exam.ktwebfx.api" level="info" additivity="false">
       <AppenderRef ref="console"/>
       <AppenderRef ref="file"/>
-    </AsyncLogger>
+    </Logger>
 
   </Loggers>
 </Configuration>
