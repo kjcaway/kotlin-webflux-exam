@@ -12,10 +12,6 @@ class JsonUtil {
 
         /**
          * Get Object from json string
-         *
-         * @param jsonStr String?
-         * @param type Clazz<T>
-         * @return T
          */
         fun <T> convertToObject(jsonStr: String, type: Class<T>): T {
             return try {
@@ -27,9 +23,6 @@ class JsonUtil {
 
         /**
          * Get json string from Object
-         *
-         * @param obj Any?
-         * @return String
          */
         fun convertToJsonStr(obj: Any): String {
             return try {
