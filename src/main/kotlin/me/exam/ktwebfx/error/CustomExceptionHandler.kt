@@ -11,20 +11,16 @@ import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.http.codec.ServerCodecConfigurer
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.server.HandlerFunction
-import org.springframework.web.reactive.function.server.RequestPredicates
-import org.springframework.web.reactive.function.server.RouterFunction
-import org.springframework.web.reactive.function.server.RouterFunctions
-import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.*
 import org.springframework.web.server.ResponseStatusException
 
 @Component
 @Order(-2)
 class CustomExceptionHandler(
-        errorAttributes: ErrorAttributes,
-        webProperties: WebProperties,
-        applicationContext: ApplicationContext,
-        serverCodecConfigurer: ServerCodecConfigurer
+    errorAttributes: ErrorAttributes,
+    webProperties: WebProperties,
+    applicationContext: ApplicationContext,
+    serverCodecConfigurer: ServerCodecConfigurer
 ) : AbstractErrorWebExceptionHandler(errorAttributes, webProperties.resources, applicationContext) {
     private val logger: Logger = LoggerFactory.getLogger(CustomExceptionHandler::class.java)
 
@@ -44,7 +40,7 @@ class CustomExceptionHandler(
                 logger.error(ex.message, ex)
 
                 ServerResponse.status(ex.getErrorCode().httpStatus).bodyValue(
-                        ApiResult.error(ex.message)
+                    ApiResult.error(ex.message)
                 )
             }
 
@@ -53,7 +49,7 @@ class CustomExceptionHandler(
                 logger.error(ex.message, ex)
 
                 ServerResponse.status(ex.statusCode).bodyValue(
-                        ApiResult.error(ex.message)
+                    ApiResult.error(ex.message)
                 )
             }
 
@@ -61,7 +57,7 @@ class CustomExceptionHandler(
                 logger.error(ex.message, ex)
 
                 ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).bodyValue(
-                        ApiResult.error(ex.message)
+                    ApiResult.error(ex.message)
                 )
             }
         }

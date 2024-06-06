@@ -15,7 +15,6 @@ class LoggingFilter : WebFilter {
     private val logger: Logger = LoggerFactory.getLogger(LoggingFilter::class.java)
 
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
-
         val request = exchange.request
 
         logger.info("url path: ${request.path}, method: ${request.method}")

@@ -10,12 +10,12 @@ import org.springframework.core.env.Environment
 
 @Configuration
 @PropertySource(
-        value = ["file:\${json-env-file-path}"],
-        ignoreResourceNotFound = true,
-        factory = JsonPropertySourceFactory::class
+    value = ["file:\${json-env-file-path}"],
+    ignoreResourceNotFound = true,
+    factory = JsonPropertySourceFactory::class
 )
 class JsonPropertyConfig(
-        val environment: Environment
+    val environment: Environment
 ) {
     private val logger: Logger = LoggerFactory.getLogger(JsonPropertyConfig::class.java)
 

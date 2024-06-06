@@ -23,8 +23,8 @@ abstract class IntegrationTest {
 
         init {
             redis = GenericContainer(REDIS_IMAGE_NAME)
-                    .withExposedPorts(PORT)
-                    .withReuse(true)
+                .withExposedPorts(PORT)
+                .withReuse(true)
         }
 
         @JvmStatic

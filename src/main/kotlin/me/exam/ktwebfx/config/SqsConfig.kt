@@ -39,19 +39,19 @@ class SqsConfig {
     @Bean
     fun sqsAsyncClient(): SqsAsyncClient {
         return SqsAsyncClient.builder()
-                .credentialsProvider(this::credentialProvider)
-                .region(Region.of(region))
-                .build()
+            .credentialsProvider(this::credentialProvider)
+            .region(Region.of(region))
+            .build()
     }
 
     @Bean
     fun defaultSqsListenerContainerFactory(): SqsMessageListenerContainerFactory<Any> {
         return SqsMessageListenerContainerFactory.builder<Any>()
-                .configure { opt ->
-                    opt.acknowledgementMode(AcknowledgementMode.MANUAL)
-                }
-                .sqsAsyncClient(sqsAsyncClient())
-                .build()
+            .configure { opt ->
+                opt.acknowledgementMode(AcknowledgementMode.MANUAL)
+            }
+            .sqsAsyncClient(sqsAsyncClient())
+            .build()
     }
 
     @Bean

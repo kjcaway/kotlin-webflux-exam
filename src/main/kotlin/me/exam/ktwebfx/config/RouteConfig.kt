@@ -13,7 +13,7 @@ class RouteConfig {
     @Bean
     fun router(helloWorldHandler: HelloWorldHandler): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
-                .GET("/api/v2/hello") { helloWorldHandler.get() }
-                .build()
+            .GET("/api/v2/hello") { helloWorldHandler.get() }
+            .build()
     }
 }

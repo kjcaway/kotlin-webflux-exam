@@ -33,7 +33,11 @@ class SoapComponent {
             val methodTag = doc.createElement(methodName)
 
             // set node xmlns
-            methodTag.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://tempuri.org/")
+            methodTag.setAttributeNS(
+                "http://www.w3.org/2000/xmlns/",
+                "xmlns",
+                "http://tempuri.org/"
+            )
 
             // set xml document
             params.forEach { (key: String, value: String) ->
@@ -62,7 +66,10 @@ class SoapComponent {
             http.setDoOutput(true)
             http.setRequestMethod("POST")
             http.setRequestProperty("content-type", "text/xml;charset=UTF-8")
-            http.setRequestProperty("SOAPAction", "http://tempuri.org/ICompanyObjectService/$methodName")
+            http.setRequestProperty(
+                "SOAPAction",
+                "http://tempuri.org/ICompanyObjectService/$methodName"
+            )
             val outStream = OutputStreamWriter(http.outputStream, "UTF-8")
             val writer = PrintWriter(outStream)
             writer.write(requestBody)

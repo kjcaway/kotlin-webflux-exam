@@ -22,7 +22,7 @@ import org.springframework.web.reactive.function.BodyInserters
 @TestMethodOrder(MethodOrderer.MethodName::class)
 @AutoConfigureWebTestClient
 class HelloControllerTest @Autowired constructor(
-        val webTestClient: WebTestClient
+    val webTestClient: WebTestClient
 ) : IntegrationTest() {
 
     @Value("\${external.services.test.url:}")
@@ -36,9 +36,9 @@ class HelloControllerTest @Autowired constructor(
     @Test
     fun `TEST_01_(GET) hello OK`() {
         webTestClient.get()
-                .uri("/api/hello")
-                .exchange()
-                .expectStatus().isOk
+            .uri("/api/hello")
+            .exchange()
+            .expectStatus().isOk
     }
 
     @Test
@@ -52,29 +52,29 @@ class HelloControllerTest @Autowired constructor(
         """.trimIndent()
 
         webTestClient.post()
-                .uri("/api/hello/redis")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(JsonUtil.convertToMap(data)))
-                .exchange()
-                .expectStatus().isOk
+            .uri("/api/hello/redis")
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromValue(JsonUtil.convertToMap(data)))
+            .exchange()
+            .expectStatus().isOk
     }
 
     @Test
     fun `TEST_03_(GET) redis OK`() {
         webTestClient.get()
-                .uri("/api/hello/redis?key=test&field=2")
-                .exchange()
-                .expectStatus().isOk
-                .expectBody()
-                .jsonPath("$.success").isEqualTo(true)
-                .jsonPath("$.data").isEqualTo("abc")
+            .uri("/api/hello/redis?key=test&field=2")
+            .exchange()
+            .expectStatus().isOk
+            .expectBody()
+            .jsonPath("$.success").isEqualTo(true)
+            .jsonPath("$.data").isEqualTo("abc")
     }
 
     @Test
     fun `TEST_04_(GET) redis NOT_FOUND`() {
         webTestClient.get()
-                .uri("/api/hello/redis?key=notfound&field=1")
-                .exchange()
-                .expectStatus().isNotFound
+            .uri("/api/hello/redis?key=notfound&field=1")
+            .exchange()
+            .expectStatus().isNotFound
     }
 }

@@ -3,8 +3,8 @@ package me.exam.ktwebfx.error
 import org.springframework.http.HttpStatus
 
 enum class CustomErrorCode(
-        val httpStatus: HttpStatus,
-        val message: String?
+    val httpStatus: HttpStatus,
+    val message: String?
 ) {
     // 400
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "bad request"),

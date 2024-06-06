@@ -14,7 +14,7 @@ class HelloWorldHandler {
 
     fun get(): Mono<ServerResponse> {
         logger.info("test")
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ApiResult.ok("test"));
-
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(ApiResult.ok("test"));
     }
 }

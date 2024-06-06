@@ -16,8 +16,8 @@ class ArchTest {
     fun `Service는 Controller에서만 접근 가능하다`() {
         val classes = ClassFileImporter().importPackages("me.exam.ktwebfx.api")
         val rule: ArchRule = classes()
-                .that().haveNameMatching(".*Controller")
-                .should().onlyHaveDependentClassesThat().resideInAPackage("..service..")
+            .that().haveNameMatching(".*Controller")
+            .should().onlyHaveDependentClassesThat().resideInAPackage("..service..")
         rule.check(classes)
     }
 
@@ -25,8 +25,8 @@ class ArchTest {
     fun `반대로 Service에서 Controller를 접근 불가하다`() {
         val classes = ClassFileImporter().importPackages("me.exam.ktwebfx.api")
         val rule: ArchRule = noClasses()
-                .that().resideInAPackage("..service..")
-                .should().dependOnClassesThat().haveNameMatching(".*Controller")
+            .that().resideInAPackage("..service..")
+            .should().dependOnClassesThat().haveNameMatching(".*Controller")
         rule.check(classes)
     }
 }
